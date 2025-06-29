@@ -59,6 +59,40 @@ SELECT DATE_SUB(CURDATE(), INTERVAL 12 YEAR); -- minus
 SELECT 3-4;
 SELECT NOW() - INTERVAL 18 YEAR; -- not years but year
 SELECT name, birthdate, YEAR(birthdate + INTERVAL 21 YEAR) AS will_be_21 FROM people;
-
 -- timestamps combine date and time. timestamps takes less storage then datetime. Support smaller range of dates
-SELECT TIMESTAMP ('2022-10-05 17:53:28')
+SELECT TIMESTAMP ('2022-10-05 17:53:28');
+
+CREATE TABLE captions (
+  text VARCHAR(150),
+  created_at TIMESTAMP default CURRENT_TIMESTAMP
+);
+ 
+CREATE TABLE captions2 (
+  text VARCHAR(150),
+  created_at TIMESTAMP default CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO captions2 (text) VALUES ('hi world'); 
+SELECT * FROM captions2; 
+UPDATE captions2 SET text ='i love life'; -- updated at column wil change. 
+
+SELECT DAYOFWEEK(CURDATE()); -- sunday is 1
+SELECT DAYNAME(CURDATE());
+SELECT DATE_FORMAT(CURDATE(), '%m/%d/%Y') AS date;
+
+SELECT DATE_FORMAT(NOW(), '%M %D at %k:%i');
+ 
+CREATE TABLE tweets(
+    content VARCHAR(140),
+    username VARCHAR(20),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+ 
+INSERT INTO tweets (content, username) VALUES('this is my first tweet', 'coltscat');
+SELECT * FROM tweets;
+ 
+INSERT INTO tweets (content, username) VALUES('this is my second tweet', 'coltscat');
+SELECT * FROM tweets;
+
+
