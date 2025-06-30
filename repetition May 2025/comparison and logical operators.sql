@@ -90,3 +90,13 @@ GROUP BY author_fname, author_lname;
 
 SELECT title, author_lname
 FROM books WHERE SUBSTR(author_lname, 1, 1) in ('C', 'S');
+
+SELECT * FROM people WHERE birthdate < '2005-01-01';
+SELECT * FROM people WHERE YEAR(birthdate) < 2005; -- this is more reliable if I care just abt year
+SELECT * FROM people WHERE birthtime > '11:00:00';-- we compare time to string. more reliable to use HOUR
+SELECT * FROM people WHERE HOUR(birthtime) > 11;
+
+SELECT CAST('09:00:00' AS TIME); -- we change data type from string to some other what is needed
+SELECT * FROM people WHERE birthtime BETWEEN '12:00:00' AND '16:00:00'; -- it will work, but more save is to use CAST
+SELECT * FROM people WHERE birthtime BETWEEN CAST('12:00:00' AS TIME) AND CAST('16:00:00' AS TIME); 
+SELECT * FROM people WHERE HOUR(birthtime) BETWEEN 12 and 16;
